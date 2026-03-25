@@ -261,112 +261,199 @@
             color: var(--gold);
         }
 
-        .hero-buttons {
+        /* --- The morph button --- */
+        .btn-hero {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--black);
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+            background-size: 200% 200%;
+            background-position: 50% 50%;
+            padding: 20px 48px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.7s forwards;
+            transition: background-color 0.8s ease,
+                        background 0.8s ease,
+                        color 0.8s ease,
+                        padding 0.5s ease,
+                        border-radius 0.5s ease,
+                        box-shadow 0.4s ease,
+                        transform 0.3s ease,
+                        border-color 0.5s ease;
+            box-shadow: 0 4px 20px rgba(210, 179, 44, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(210, 179, 44, 0.35),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            background-position: 0% 0%;
+        }
+
+        .btn-hero:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 12px rgba(210, 179, 44, 0.2);
+        }
+
+        /* During forward video: muted glass look */
+        .btn-hero.working {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.45);
+            pointer-events: none;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .btn-hero.working::after { opacity: 0; }
+
+        /* After forward: morph to stop — soft rose, smaller, rounded */
+        .btn-hero.stop-state {
+            background: rgba(200, 120, 110, 0.2);
+            color: #e8a9a3;
+            padding: 12px 30px;
+            font-size: clamp(0.82rem, 1.4vw, 0.9rem);
+            font-weight: 600;
+            border-radius: 40px;
+            box-shadow: 0 0 0 1px rgba(200, 120, 110, 0.25) inset;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            letter-spacing: 0.04em;
+        }
+
+        .btn-hero.stop-state::after { opacity: 0; }
+
+        .btn-hero.stop-state:hover {
+            background: rgba(200, 120, 110, 0.3);
+            color: #f0bdb8;
+            box-shadow: 0 4px 20px rgba(200, 120, 110, 0.15),
+                        0 0 0 1px rgba(200, 120, 110, 0.3) inset;
+        }
+
+        /* During reverse video: same glass as forward */
+        .btn-hero.working-reverse {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.45);
+            pointer-events: none;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .btn-hero.working-reverse::after { opacity: 0; }
+
+        /* Icon inside button */
+        .btn-hero-icon {
+            display: flex;
+            align-items: center;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        /* --- CTA buttons above --- */
+        .hero-ctas {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
+            min-height: 56px;
+        }
+
+        .btn-primary, .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 17px 36px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 0.8s ease 0.7s forwards;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                        background 0.3s ease,
+                        box-shadow 0.3s ease,
+                        border-color 0.3s ease,
+                        color 0.3s ease;
         }
 
         .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-body);
-            font-size: 0.88rem;
-            font-weight: 600;
-            letter-spacing: 0.02em;
             color: var(--black);
             background: var(--gold);
-            padding: 15px 32px;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             background: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(210, 179, 44, 0.3);
+            transform: translateY(-2px) scale(1);
+            box-shadow: 0 8px 30px rgba(210, 179, 44, 0.35);
         }
 
         .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-body);
-            font-size: 0.88rem;
-            font-weight: 600;
-            letter-spacing: 0.02em;
             color: var(--white);
             background: transparent;
-            padding: 15px 32px;
-            border: 1.5px solid rgba(255, 255, 255, 0.25);
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .btn-secondary:hover {
             border-color: var(--gold);
             color: var(--gold);
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1);
         }
 
-        .btn-toggle-solar {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            font-family: var(--font-display);
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            font-weight: 700;
-            color: var(--black);
-            background: var(--gold);
-            padding: 18px 44px;
-            border: 2px solid var(--gold);
-            border-radius: 60px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        /* Revealed state */
+        .btn-primary.shown {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .btn-secondary.shown {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+            transition-delay: 0.12s;
+        }
+
+        /* Hiding back */
+        .btn-primary.hiding {
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 0.8s ease 0.9s forwards;
-        }
-
-        .btn-toggle-solar:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(210, 179, 44, 0.35);
-        }
-
-        .btn-toggle-solar:active {
-            transform: translateY(0);
-        }
-
-        .btn-toggle-solar.active {
-            background: transparent;
-            color: var(--gold);
-        }
-
-        .btn-toggle-solar.playing {
+            transform: translateY(-12px) scale(0.97);
             pointer-events: none;
-            opacity: 0.6;
+            transition-delay: 0.08s;
         }
 
-        .btn-toggle-icon {
-            display: flex;
-            align-items: center;
-            transition: transform 0.5s ease;
-        }
-
-        .btn-toggle-solar.active .btn-toggle-icon {
-            transform: rotate(180deg);
+        .btn-secondary.hiding {
+            opacity: 0;
+            transform: translateY(-12px) scale(0.97);
+            pointer-events: none;
+            transition-delay: 0s;
         }
 
         /* Ornaments */
@@ -954,6 +1041,10 @@
         /* ========================================
            ANIMATIONS
            ======================================== */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         @keyframes fadeUp {
             to {
                 opacity: 1;
@@ -1032,9 +1123,14 @@
                 display: flex;
             }
 
-            .btn-toggle-solar {
-                padding: 18px 36px;
-                font-size: 1rem;
+            .hero-ctas {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
             }
 
             .calc-grid {
@@ -1060,18 +1156,6 @@
             }
         }
 
-        @media (max-width: 480px) {
-            .hero-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-                justify-content: center;
-            }
-
-        }
     </style>
 </head>
 <body>
@@ -1109,16 +1193,16 @@
 
             <h1>Váš dům vydělává<br><em>peníze na střeše</em></h1>
 
-            <div class="hero-buttons">
-                <a href="#kontakt" class="btn-primary">Chci bezplatnou nabídku</a>
-                <a href="#kalkulacka" class="btn-secondary">Kalkulačka úspor</a>
+            <div class="hero-ctas">
+                <a href="#kontakt" class="btn-primary" id="ctaPrimary">Chci bezplatnou nabídku</a>
+                <a href="#kalkulacka" class="btn-secondary" id="ctaSecondary">Kalkulačka úspor</a>
             </div>
 
-            <button class="btn-toggle-solar" id="solarToggle">
-                <span class="btn-toggle-icon" id="solarIcon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <button class="btn-hero" id="btnHero">
+                <span class="btn-hero-icon" id="btnHeroIcon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 </span>
-                <span class="btn-toggle-text" id="solarText">Začít šetřit</span>
+                <span id="btnHeroText">Chci šetřit</span>
             </button>
         </div>
     </section>
@@ -1319,14 +1403,20 @@
         });
 
         /* ========================================
-           VIDEO TOGGLE — TWO PRELOADED VIDEOS
+           VIDEO TOGGLE — MORPH BUTTON
            ======================================== */
         const vidFwd = document.getElementById('vidForward');
         const vidRev = document.getElementById('vidReverse');
-        const solarToggle = document.getElementById('solarToggle');
-        const solarText = document.getElementById('solarText');
-        let panelsUp = false;
-        let isAnimating = false;
+        const btnHero = document.getElementById('btnHero');
+        const btnHeroText = document.getElementById('btnHeroText');
+        const btnHeroIcon = document.getElementById('btnHeroIcon');
+        const ctaPrimary = document.getElementById('ctaPrimary');
+        const ctaSecondary = document.getElementById('ctaSecondary');
+        let state = 'idle'; // idle | playing-fwd | ready | playing-rev
+
+        const iconMoney = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>';
+        const iconX = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+        const iconLoader = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>';
 
         // Both paused on first frame
         [vidFwd, vidRev].forEach(v => {
@@ -1334,52 +1424,86 @@
             if (v.readyState >= 2) { v.pause(); v.currentTime = 0; }
         });
 
-        // Bring video to front only once it's actually rendering frames
         function bringToFront(video, other) {
             video.classList.add('on-top');
             other.classList.remove('on-top');
         }
 
-        solarToggle.addEventListener('click', () => {
-            if (isAnimating) return;
-            isAnimating = true;
-            solarToggle.classList.add('playing');
+        btnHero.addEventListener('click', () => {
+            if (state === 'idle') {
+                // ======= FORWARD =======
+                state = 'playing-fwd';
 
-            if (!panelsUp) {
-                // FORWARD — vidFwd is already on top, just play
+                // Button → working state immediately
+                btnHero.classList.add('working');
+                btnHeroText.textContent = 'Instaluji panely…';
+                btnHeroIcon.innerHTML = iconLoader;
+
                 vidFwd.currentTime = 0;
                 vidFwd.play();
 
+                // At 60% of video → reveal CTAs + morph button together
+                const dur = vidFwd.duration || 8;
+                setTimeout(() => {
+                    ctaPrimary.classList.add('shown');
+                    ctaSecondary.classList.add('shown');
+
+                    // Morph button to stop state at the same time
+                    btnHero.classList.remove('working');
+                    btnHero.classList.add('stop-state');
+                    btnHeroText.textContent = 'Přestat šetřit';
+                    btnHeroIcon.innerHTML = iconX;
+
+                    state = 'ready';
+                }, dur * 0.6 * 1000);
+
                 vidFwd.addEventListener('ended', () => {
                     vidFwd.pause();
-                    // Prep reverse: reset to frame 0 (= last frame of original)
                     vidRev.currentTime = 0;
-                    panelsUp = true;
-                    isAnimating = false;
-                    solarToggle.classList.remove('playing');
-                    solarToggle.classList.add('active');
-                    solarText.textContent = 'Přestat šetřit';
                 }, { once: true });
 
-            } else {
-                // REVERSE — start playing reverse behind, swap once it renders
-                vidRev.currentTime = 0;
-                vidRev.play();
+            } else if (state === 'ready') {
+                // ======= REVERSE =======
+                state = 'playing-rev';
 
-                vidRev.addEventListener('playing', () => {
-                    bringToFront(vidRev, vidFwd);
-                }, { once: true });
+                // Hide CTA buttons (staggered)
+                ctaPrimary.classList.add('hiding');
+                ctaPrimary.classList.remove('shown');
+                ctaSecondary.classList.add('hiding');
+                ctaSecondary.classList.remove('shown');
 
-                vidRev.addEventListener('ended', () => {
-                    vidRev.pause();
-                    // Prep forward: reset to frame 0, bring to front
-                    vidFwd.currentTime = 0;
-                    bringToFront(vidFwd, vidRev);
-                    panelsUp = false;
-                    isAnimating = false;
-                    solarToggle.classList.remove('playing', 'active');
-                    solarText.textContent = 'Začít šetřit';
-                }, { once: true });
+                // Button → working reverse
+                btnHero.classList.remove('stop-state');
+                btnHero.classList.add('working-reverse');
+                btnHeroText.textContent = 'Odstraňuji panely…';
+                btnHeroIcon.innerHTML = iconLoader;
+
+                setTimeout(() => {
+                    ctaPrimary.classList.remove('hiding');
+                    ctaSecondary.classList.remove('hiding');
+
+                    vidRev.currentTime = 0;
+                    vidRev.play();
+
+                    vidRev.addEventListener('playing', () => {
+                        bringToFront(vidRev, vidFwd);
+                    }, { once: true });
+
+                    // At 70% → start morphing button back to gold
+                    const revDur = vidRev.duration || 8;
+                    setTimeout(() => {
+                        btnHero.classList.remove('working-reverse');
+                        btnHeroText.textContent = 'Chci šetřit';
+                        btnHeroIcon.innerHTML = iconMoney;
+                    }, revDur * 0.7 * 1000);
+
+                    vidRev.addEventListener('ended', () => {
+                        vidRev.pause();
+                        vidFwd.currentTime = 0;
+                        bringToFront(vidFwd, vidRev);
+                        state = 'idle';
+                    }, { once: true });
+                }, 400);
             }
         });
 
