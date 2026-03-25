@@ -1156,9 +1156,53 @@
             }
         }
 
+        /* Mobile/tablet gate */
+        .mobile-gate {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: var(--black);
+            color: var(--white);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            gap: 1.5rem;
+        }
+
+        .mobile-gate svg {
+            opacity: 0.4;
+        }
+
+        .mobile-gate h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .mobile-gate p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 320px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px), (hover: none) and (pointer: coarse) {
+            .mobile-gate { display: flex; }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Mobile/tablet gate -->
+    <div class="mobile-gate">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D2B32C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <h2>Otevřete na počítači</h2>
+        <p>Tato stránka využívá interaktivní video animaci, která funguje nejlépe na desktopu. Otevřete prosím odkaz na počítači.</p>
+    </div>
 
     <!-- ===== NAVIGATION ===== -->
     <nav class="nav" id="nav">
