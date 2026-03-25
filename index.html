@@ -1466,44 +1466,42 @@
                 // ======= REVERSE =======
                 state = 'playing-rev';
 
-                // Hide CTA buttons (staggered)
+                // Everything at once — no delay
                 ctaPrimary.classList.add('hiding');
                 ctaPrimary.classList.remove('shown');
                 ctaSecondary.classList.add('hiding');
                 ctaSecondary.classList.remove('shown');
 
-                // Button → working reverse
                 btnHero.classList.remove('stop-state');
                 btnHero.classList.add('working-reverse');
                 btnHeroText.textContent = 'Odstraňuji panely…';
                 btnHeroIcon.innerHTML = iconLoader;
 
-                setTimeout(() => {
+                vidRev.currentTime = 0;
+                vidRev.play();
+
+                vidRev.addEventListener('playing', () => {
+                    bringToFront(vidRev, vidFwd);
                     ctaPrimary.classList.remove('hiding');
                     ctaSecondary.classList.remove('hiding');
+                }, { once: true });
 
-                    vidRev.currentTime = 0;
-                    vidRev.play();
+                // At 70% → morph button back to gold
+                const revDur = vidRev.duration || 8;
+                setTimeout(() => {
+                    btnHero.classList.remove('working-reverse');
+                    btnHeroText.textContent = 'Chci šetřit';
+                    btnHeroIcon.innerHTML = iconMoney;
+                }, revDur * 0.7 * 1000);
 
-                    vidRev.addEventListener('playing', () => {
-                        bringToFront(vidRev, vidFwd);
-                    }, { once: true });
-
-                    // At 70% → start morphing button back to gold
-                    const revDur = vidRev.duration || 8;
-                    setTimeout(() => {
-                        btnHero.classList.remove('working-reverse');
-                        btnHeroText.textContent = 'Chci šetřit';
-                        btnHeroIcon.innerHTML = iconMoney;
-                    }, revDur * 0.7 * 1000);
-
-                    vidRev.addEventListener('ended', () => {
-                        vidRev.pause();
-                        vidFwd.currentTime = 0;
+                vidRev.addEventListener('ended', () => {
+                    vidRev.pause();
+                    vidFwd.currentTime = 0;
+                    vidFwd.addEventListener('seeked', () => {
                         bringToFront(vidFwd, vidRev);
                         state = 'idle';
                     }, { once: true });
-                }, 400);
+                }, { once: true });
             }
         });
 
