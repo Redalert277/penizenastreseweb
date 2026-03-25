@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peníze na střeše – Fotovoltaika od roku 2013</title>
+    <meta name="description" content="Instalujeme fotovoltaiku od roku 2013. Platba až po dodání. 1 500+ instalací, 99% spokojených zákazníků.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D2B32C;
+            --gold-light: #e8cc5a;
+            --gold-dark: #b89a1f;
+            --black: #1a1a1a;
+            --white: #ffffff;
+            --grey-dark: #2d2d2d;
+            --grey-mid: #3a3a3a;
+            --grey-light: #f5f4f0;
+            --grey-muted: #999;
+            --font-display: 'Bricolage Grotesque', sans-serif;
+            --font-body: 'Manrope', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--black);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 clamp(1.5rem, 4vw, 3rem);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(26, 26, 26, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(210, 179, 44, 0.15);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        .nav-logo-svg {
+            height: 28px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--black) !important;
+            background: var(--gold);
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+            color: var(--black) !important;
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 10;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-video-wrap {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-video-wrap video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-video-wrap .on-top {
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(180deg,
+                    rgba(26, 26, 26, 0.55) 0%,
+                    rgba(26, 26, 26, 0.25) 40%,
+                    rgba(26, 26, 26, 0.3) 60%,
+                    rgba(26, 26, 26, 0.7) 100%
+                );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 0 clamp(1.5rem, 5vw, 4rem);
+            max-width: 900px;
+        }
+
+        .hero-logo-mark {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease 0.3s forwards;
+        }
+
+        .hero-logo-mark .hero-logo-svg {
+            height: clamp(50px, 8vw, 72px);
+            width: auto;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+            line-height: 1.08;
+            color: var(--white);
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease 0.5s forwards;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--gold);
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease 0.7s forwards;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--black);
+            background: var(--gold);
+            padding: 15px 32px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(210, 179, 44, 0.3);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--white);
+            background: transparent;
+            padding: 15px 32px;
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .btn-toggle-solar {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-display);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 700;
+            color: var(--black);
+            background: var(--gold);
+            padding: 18px 44px;
+            border: 2px solid var(--gold);
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease 0.9s forwards;
+        }
+
+        .btn-toggle-solar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(210, 179, 44, 0.35);
+        }
+
+        .btn-toggle-solar:active {
+            transform: translateY(0);
+        }
+
+        .btn-toggle-solar.active {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .btn-toggle-solar.playing {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .btn-toggle-icon {
+            display: flex;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+
+        .btn-toggle-solar.active .btn-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Ornaments */
+        .ornament { position: absolute; pointer-events: none; opacity: 0.03; }
+        .ornament svg { width: 100%; height: 100%; }
+        .ornament-calc { right: -40px; top: -60px; width: 280px; height: 280px; transform: rotate(15deg); }
+        .ornament-contact { left: -100px; bottom: -80px; width: 350px; height: 350px; transform: rotate(-10deg); }
+
+        .section-ornament-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 2rem;
+        }
+
+        .section-ornament-line::before,
+        .section-ornament-line::after {
+            content: '';
+            height: 1px;
+            width: 40px;
+            background: linear-gradient(90deg, transparent, var(--gold));
+        }
+
+        .section-ornament-line::after {
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        .section-ornament-line svg {
+            width: 28px;
+            height: 28px;
+            opacity: 0.6;
+        }
+
+        /* ========================================
+           CALCULATOR SECTION
+           ======================================== */
+        .calculator {
+            position: relative;
+            padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 4vw, 3rem);
+            background: var(--grey-light);
+            overflow: hidden;
+        }
+
+        .calculator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .calculator-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.1;
+            color: var(--black);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-desc {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--grey-muted);
+            line-height: 1.6;
+            max-width: 520px;
+            margin-bottom: 3rem;
+        }
+
+        .calc-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 12px 40px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .calc-form {
+            padding: clamp(2rem, 4vw, 3rem);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem 2rem;
+        }
+
+        .calc-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .calc-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .calc-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--grey-mid);
+        }
+
+        .calc-slider-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .calc-slider-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .calc-slider-value {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--black);
+        }
+
+        .calc-slider-value small {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--grey-muted);
+            margin-left: 4px;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e5e3dc;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 3px solid var(--white);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 3px 12px rgba(210, 179, 44, 0.4);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 3px solid var(--white);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+
+        .calc-select, .calc-input {
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--black);
+            background: var(--grey-light);
+            border: 1.5px solid transparent;
+            border-radius: 6px;
+            padding: 13px 16px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        .calc-select:focus, .calc-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(210, 179, 44, 0.12);
+        }
+
+        .calc-select {
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+
+        .calc-submit-row {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-calc {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--white);
+            background: var(--black);
+            padding: 15px 36px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.01em;
+        }
+
+        .btn-calc:hover {
+            background: var(--grey-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-calc svg {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-calc:hover svg {
+            transform: translateX(3px);
+        }
+
+        .calc-results {
+            display: none;
+            background: var(--black);
+            padding: clamp(2rem, 4vw, 3rem);
+        }
+
+        .calc-results.visible {
+            display: block;
+            animation: slideDown 0.5s ease;
+        }
+
+        .calc-results-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .calc-results-header h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--white);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .result-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .result-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(210, 179, 44, 0.1);
+        }
+
+        .result-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gold);
+        }
+
+        .result-value {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            color: var(--gold);
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
+        }
+
+        .result-value small {
+            font-size: 0.5em;
+            font-weight: 500;
+            color: var(--gold-light);
+        }
+
+        .result-label {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.02em;
+        }
+
+        /* ========================================
+           CONTACT SECTION
+           ======================================== */
+        .contact {
+            position: relative;
+            padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 4vw, 3rem);
+            background: var(--black);
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .contact-bg-glow {
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(210, 179, 44, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .contact-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: clamp(3rem, 6vw, 5rem);
+            align-items: start;
+        }
+
+        .contact-info {
+            padding-top: 0.5rem;
+        }
+
+        .contact .section-eyebrow {
+            color: var(--gold);
+        }
+
+        .contact .section-title {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .contact-detail:first-of-type {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .contact-detail-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(210, 179, 44, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-detail-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--gold);
+        }
+
+        .contact-detail-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .contact-detail-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .contact-detail-value {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .contact-detail-value a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-detail-value a:hover {
+            color: var(--gold);
+        }
+
+        .contact-form-wrap {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+        }
+
+        .contact-form-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-input, .form-select {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 12px 14px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(210, 179, 44, 0.1);
+        }
+
+        .form-select {
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+
+        .form-select option {
+            background: var(--grey-dark);
+            color: var(--white);
+        }
+
+        .btn-submit {
+            width: 100%;
+            margin-top: 1.5rem;
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--black);
+            background: var(--gold);
+            padding: 15px 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(210, 179, 44, 0.25);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            padding: 2rem clamp(1.5rem, 4vw, 3rem);
+            background: var(--black);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .footer-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-copy a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+        }
+
+        .footer-copy a:hover {
+            color: var(--gold);
+        }
+
+        /* ========================================
+           ANIMATIONS
+           ======================================== */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        @keyframes scroll-pulse {
+            0%, 100% { opacity: 0.4; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(0.6); transform-origin: top; }
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(26, 26, 26, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                padding: 2rem;
+                gap: 1.5rem;
+                transition: right 0.4s ease;
+            }
+
+            .nav-links.open {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+                color: var(--white);
+            }
+
+            .nav-hamburger {
+                display: flex;
+            }
+
+            .btn-toggle-solar {
+                padding: 18px 36px;
+                font-size: 1rem;
+            }
+
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="nav" id="nav">
+        <a href="#hero" class="nav-logo">
+            <img src="8xdTJMvmhcAYcq9D05Xgh.svg" alt="Peníze na střeše" class="nav-logo-svg">
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#hero" onclick="closeMenu()">Úvod</a></li>
+            <li><a href="#kalkulacka" onclick="closeMenu()">Kalkulačka</a></li>
+            <li><a href="#kontakt" onclick="closeMenu()">Kontakt</a></li>
+            <li><a href="#kontakt" class="nav-cta" onclick="closeMenu()">Nezávazná nabídka</a></li>
+        </ul>
+        <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="hero-video-wrap">
+            <video id="vidForward" class="on-top" muted playsinline preload="auto" src="animation.mp4"></video>
+            <video id="vidReverse" muted playsinline preload="auto" src="animation_reverse.mp4"></video>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-logo-mark">
+                <img src="8xdTJMvmhcAYcq9D05Xgh.svg" alt="Peníze na střeše" class="hero-logo-svg">
+            </div>
+
+            <h1>Váš dům vydělává<br><em>peníze na střeše</em></h1>
+
+            <div class="hero-buttons">
+                <a href="#kontakt" class="btn-primary">Chci bezplatnou nabídku</a>
+                <a href="#kalkulacka" class="btn-secondary">Kalkulačka úspor</a>
+            </div>
+
+            <button class="btn-toggle-solar" id="solarToggle">
+                <span class="btn-toggle-icon" id="solarIcon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                </span>
+                <span class="btn-toggle-text" id="solarText">Začít šetřit</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== CALCULATOR ===== -->
+    <section class="calculator" id="kalkulacka">
+        <div class="ornament ornament-calc">
+            <svg viewBox="100 0 630 274" xmlns="http://www.w3.org/2000/svg"><path fill="#D2B32C" d="M713.35,165.77h56.25l15.62,13.26,27.51,23.35c10.49-19.39,16.44-41.59,16.44-65.18C829.17,61.43,767.74,0,691.97,0c-46.66,0-87.87,23.3-112.66,58.89l26.88,22.81c18.23-28.09,49.87-46.7,85.78-46.7,56.36,0,102.21,45.85,102.21,102.21,0,5.65-.47,11.19-1.35,16.59l-100.13-82.68c-5.02-4.15-12.6-.57-12.6,5.94v95.77l-84.08-70.8-15.04-12.67-12.96-11s-.02.04-.03.06c-.49,1.03-.96,2.06-1.43,3.1-7.57,17.02-11.78,35.87-11.78,55.7,0,75.78,61.43,137.21,137.21,137.21,44.18,0,83.48-20.89,108.58-53.32l-26.75-22.71c-18.66,24.89-48.39,41.03-81.83,41.03-54.76,0-99.6-43.3-102.09-97.46l65.56,55.51h47.93v-87.46l38.15,32.28h-28.17v23.48Z"/></svg>
+        </div>
+        <div class="calculator-inner">
+            <div class="reveal">
+                <div class="section-ornament-line">
+                    <svg viewBox="100 0 630 274" xmlns="http://www.w3.org/2000/svg"><path fill="#D2B32C" d="M713.35,165.77h56.25l15.62,13.26,27.51,23.35c10.49-19.39,16.44-41.59,16.44-65.18C829.17,61.43,767.74,0,691.97,0c-46.66,0-87.87,23.3-112.66,58.89l26.88,22.81c18.23-28.09,49.87-46.7,85.78-46.7,56.36,0,102.21,45.85,102.21,102.21,0,5.65-.47,11.19-1.35,16.59l-100.13-82.68c-5.02-4.15-12.6-.57-12.6,5.94v95.77l-84.08-70.8-15.04-12.67-12.96-11s-.02.04-.03.06c-.49,1.03-.96,2.06-1.43,3.1-7.57,17.02-11.78,35.87-11.78,55.7,0,75.78,61.43,137.21,137.21,137.21,44.18,0,83.48-20.89,108.58-53.32l-26.75-22.71c-18.66,24.89-48.39,41.03-81.83,41.03-54.76,0-99.6-43.3-102.09-97.46l65.56,55.51h47.93v-87.46l38.15,32.28h-28.17v23.48Z"/></svg>
+                </div>
+                <div class="section-eyebrow">Kalkulačka úspor</div>
+                <h2 class="section-title">Kolik ušetříte<br>s fotovoltaikou?</h2>
+                <p class="section-desc">Zadejte svou roční spotřebu a zjistěte, kolik můžete ročně ušetřit díky vlastní solární elektrárně.</p>
+            </div>
+
+            <div class="calc-card reveal">
+                <div class="calc-form">
+                    <div class="calc-grid">
+                        <div class="calc-field full-width">
+                            <div class="calc-label">Roční spotřeba elektřiny</div>
+                            <div class="calc-slider-wrap">
+                                <div class="calc-slider-header">
+                                    <div class="calc-slider-value" id="sliderValue">5 000<small>kWh</small></div>
+                                </div>
+                                <input type="range" id="consumptionSlider" min="1500" max="30000" value="5000" step="100">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="font-size: 0.7rem; color: var(--grey-muted);">1 500 kWh</span>
+                                    <span style="font-size: 0.7rem; color: var(--grey-muted);">30 000 kWh</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="calc-field">
+                            <div class="calc-label">Typ nemovitosti</div>
+                            <select class="calc-select" id="propertyType">
+                                <option value="house">Rodinný dům</option>
+                                <option value="company">Firma</option>
+                                <option value="apartment">Bytový dům</option>
+                                <option value="cottage">Chata</option>
+                            </select>
+                        </div>
+
+                        <div class="calc-field">
+                            <div class="calc-label">Město</div>
+                            <input type="text" class="calc-input" id="cityInput" placeholder="např. Ostrava">
+                        </div>
+                    </div>
+
+                    <div class="calc-submit-row">
+                        <button class="btn-calc" id="calcBtn" type="button">
+                            Vypočítat úspory
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="calc-results" id="calcResults">
+                    <div class="calc-results-header">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D2B32C" stroke-width="2" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        <h3>Vaše odhadované úspory</h3>
+                    </div>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                            </div>
+                            <div class="result-value" id="resultSavings">0<small> Kč/rok</small></div>
+                            <div class="result-label">Roční úspora</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            </div>
+                            <div class="result-value" id="resultPayback">0<small> let</small></div>
+                            <div class="result-label">Návratnost investice</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L2 21 3.65 14.48C5.38 8.21 9 4 17 4V1l5 5-5 4V8z"/></svg>
+                            </div>
+                            <div class="result-value" id="resultCO2">0<small> t/rok</small></div>
+                            <div class="result-label">Úspora CO₂</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="contact" id="kontakt">
+        <div class="contact-bg-glow"></div>
+        <div class="ornament ornament-contact">
+            <svg viewBox="100 0 630 274" xmlns="http://www.w3.org/2000/svg"><path fill="#D2B32C" d="M713.35,165.77h56.25l15.62,13.26,27.51,23.35c10.49-19.39,16.44-41.59,16.44-65.18C829.17,61.43,767.74,0,691.97,0c-46.66,0-87.87,23.3-112.66,58.89l26.88,22.81c18.23-28.09,49.87-46.7,85.78-46.7,56.36,0,102.21,45.85,102.21,102.21,0,5.65-.47,11.19-1.35,16.59l-100.13-82.68c-5.02-4.15-12.6-.57-12.6,5.94v95.77l-84.08-70.8-15.04-12.67-12.96-11s-.02.04-.03.06c-.49,1.03-.96,2.06-1.43,3.1-7.57,17.02-11.78,35.87-11.78,55.7,0,75.78,61.43,137.21,137.21,137.21,44.18,0,83.48-20.89,108.58-53.32l-26.75-22.71c-18.66,24.89-48.39,41.03-81.83,41.03-54.76,0-99.6-43.3-102.09-97.46l65.56,55.51h47.93v-87.46l38.15,32.28h-28.17v23.48Z"/></svg>
+        </div>
+        <div class="contact-inner">
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <div class="section-ornament-line">
+                        <svg viewBox="100 0 630 274" xmlns="http://www.w3.org/2000/svg"><path fill="#D2B32C" d="M713.35,165.77h56.25l15.62,13.26,27.51,23.35c10.49-19.39,16.44-41.59,16.44-65.18C829.17,61.43,767.74,0,691.97,0c-46.66,0-87.87,23.3-112.66,58.89l26.88,22.81c18.23-28.09,49.87-46.7,85.78-46.7,56.36,0,102.21,45.85,102.21,102.21,0,5.65-.47,11.19-1.35,16.59l-100.13-82.68c-5.02-4.15-12.6-.57-12.6,5.94v95.77l-84.08-70.8-15.04-12.67-12.96-11s-.02.04-.03.06c-.49,1.03-.96,2.06-1.43,3.1-7.57,17.02-11.78,35.87-11.78,55.7,0,75.78,61.43,137.21,137.21,137.21,44.18,0,83.48-20.89,108.58-53.32l-26.75-22.71c-18.66,24.89-48.39,41.03-81.83,41.03-54.76,0-99.6-43.3-102.09-97.46l65.56,55.51h47.93v-87.46l38.15,32.28h-28.17v23.48Z"/></svg>
+                    </div>
+                    <div class="section-eyebrow">Kontakt</div>
+                    <h2 class="section-title">Začněte šetřit<br>ještě letos</h2>
+
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                        </div>
+                        <div class="contact-detail-content">
+                            <span class="contact-detail-label">Telefon</span>
+                            <span class="contact-detail-value"><a href="tel:+420773770770">+420 773 770 770</a></span>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                        </div>
+                        <div class="contact-detail-content">
+                            <span class="contact-detail-label">Email</span>
+                            <span class="contact-detail-value"><a href="mailto:info@penizenastrese.cz">info@penizenastrese.cz</a></span>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div class="contact-detail-content">
+                            <span class="contact-detail-label">Adresa</span>
+                            <span class="contact-detail-value">K Myslivně 2276/5, 708 00 Ostrava</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrap reveal">
+                    <div class="contact-form-title">Poptávka zdarma</div>
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label class="form-label">Jméno</label>
+                                <input type="text" class="form-input" placeholder="Jan Novák" required>
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label">Telefon</label>
+                                <input type="tel" class="form-input" placeholder="+420 000 000 000" required>
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" placeholder="jan@email.cz" required>
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label">Město</label>
+                                <input type="text" class="form-input" placeholder="Ostrava">
+                            </div>
+                            <div class="form-field full">
+                                <label class="form-label">Typ poptávky</label>
+                                <select class="form-select" required>
+                                    <option value="" disabled selected>Vyberte typ poptávky</option>
+                                    <option value="house">Fotovoltaika pro rodinný dům</option>
+                                    <option value="company">Fotovoltaika pro firmu</option>
+                                    <option value="apartment">Fotovoltaika pro bytový dům</option>
+                                    <option value="cottage">Fotovoltaika pro chatu</option>
+                                    <option value="consultation">Bezplatná konzultace</option>
+                                    <option value="other">Jiné</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-submit">Odeslat poptávku</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-copy">&copy; 2013–2026 <a href="#">Peníze na střeše</a>. Všechna práva vyhrazena.</div>
+            <div class="footer-copy">IČO: 02437210 · K Myslivně 2276/5, Ostrava</div>
+        </div>
+    </footer>
+
+    <script>
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        const nav = document.getElementById('nav');
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        /* ========================================
+           VIDEO TOGGLE — TWO PRELOADED VIDEOS
+           ======================================== */
+        const vidFwd = document.getElementById('vidForward');
+        const vidRev = document.getElementById('vidReverse');
+        const solarToggle = document.getElementById('solarToggle');
+        const solarText = document.getElementById('solarText');
+        let panelsUp = false;
+        let isAnimating = false;
+
+        // Both paused on first frame
+        [vidFwd, vidRev].forEach(v => {
+            v.addEventListener('loadeddata', () => { v.pause(); v.currentTime = 0; });
+            if (v.readyState >= 2) { v.pause(); v.currentTime = 0; }
+        });
+
+        // Bring video to front only once it's actually rendering frames
+        function bringToFront(video, other) {
+            video.classList.add('on-top');
+            other.classList.remove('on-top');
+        }
+
+        solarToggle.addEventListener('click', () => {
+            if (isAnimating) return;
+            isAnimating = true;
+            solarToggle.classList.add('playing');
+
+            if (!panelsUp) {
+                // FORWARD — vidFwd is already on top, just play
+                vidFwd.currentTime = 0;
+                vidFwd.play();
+
+                vidFwd.addEventListener('ended', () => {
+                    vidFwd.pause();
+                    // Prep reverse: reset to frame 0 (= last frame of original)
+                    vidRev.currentTime = 0;
+                    panelsUp = true;
+                    isAnimating = false;
+                    solarToggle.classList.remove('playing');
+                    solarToggle.classList.add('active');
+                    solarText.textContent = 'Přestat šetřit';
+                }, { once: true });
+
+            } else {
+                // REVERSE — start playing reverse behind, swap once it renders
+                vidRev.currentTime = 0;
+                vidRev.play();
+
+                vidRev.addEventListener('playing', () => {
+                    bringToFront(vidRev, vidFwd);
+                }, { once: true });
+
+                vidRev.addEventListener('ended', () => {
+                    vidRev.pause();
+                    // Prep forward: reset to frame 0, bring to front
+                    vidFwd.currentTime = 0;
+                    bringToFront(vidFwd, vidRev);
+                    panelsUp = false;
+                    isAnimating = false;
+                    solarToggle.classList.remove('playing', 'active');
+                    solarText.textContent = 'Začít šetřit';
+                }, { once: true });
+            }
+        });
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        function closeMenu() {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('open');
+        }
+
+        /* ========================================
+           SLIDER
+           ======================================== */
+        const slider = document.getElementById('consumptionSlider');
+        const sliderValueEl = document.getElementById('sliderValue');
+
+        function formatNumber(n) {
+            return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+
+        function updateSlider() {
+            const val = parseInt(slider.value);
+            sliderValueEl.innerHTML = formatNumber(val) + '<small>kWh</small>';
+
+            // Update slider fill
+            const pct = ((val - 1500) / (30000 - 1500)) * 100;
+            slider.style.background = `linear-gradient(to right, #D2B32C 0%, #D2B32C ${pct}%, #e5e3dc ${pct}%, #e5e3dc 100%)`;
+        }
+
+        slider.addEventListener('input', updateSlider);
+        updateSlider();
+
+        /* ========================================
+           CALCULATOR
+           ======================================== */
+        const calcBtn = document.getElementById('calcBtn');
+        const calcResults = document.getElementById('calcResults');
+
+        function animateValue(el, start, end, suffix, duration) {
+            const startTime = performance.now();
+            const isDecimal = String(end).includes('.') || suffix.includes('let') || suffix.includes('t/rok');
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = start + (end - start) * eased;
+
+                if (isDecimal && end < 100) {
+                    el.innerHTML = current.toFixed(1) + '<small>' + suffix + '</small>';
+                } else {
+                    el.innerHTML = formatNumber(Math.round(current)) + '<small>' + suffix + '</small>';
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        calcBtn.addEventListener('click', () => {
+            const consumption = parseInt(slider.value);
+
+            // Formula: consumption * 0.65 * 4.5 = annual savings CZK
+            const annualSavings = Math.round(consumption * 0.65 * 4.5);
+            const payback = 5.2;
+            // CO2: roughly 0.5 kg CO2 per kWh * 65% self-consumption
+            const co2 = ((consumption * 0.65 * 0.5) / 1000);
+
+            calcResults.classList.add('visible');
+
+            // Scroll to results
+            setTimeout(() => {
+                calcResults.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+
+            // Animate numbers
+            animateValue(document.getElementById('resultSavings'), 0, annualSavings, ' Kč/rok', 1200);
+            animateValue(document.getElementById('resultPayback'), 0, payback, ' let', 1000);
+            animateValue(document.getElementById('resultCO2'), 0, co2, ' t/rok', 1100);
+        });
+
+        /* ========================================
+           CONTACT FORM
+           ======================================== */
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-submit');
+            const originalText = btn.textContent;
+            btn.textContent = 'Odesláno!';
+            btn.style.background = '#2d8a4e';
+            btn.style.color = '#fff';
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+                btn.style.color = '';
+                e.target.reset();
+            }, 3000);
+        }
+
+        /* ========================================
+           SCROLL REVEAL
+           ======================================== */
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        /* ========================================
+           SMOOTH ANCHOR SCROLLING
+           ======================================== */
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    const offset = nav.offsetHeight;
+                    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                    closeMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
